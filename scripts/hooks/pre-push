@@ -1,0 +1,16 @@
+#!/bin/sh
+# scripts/hooks/pre-push
+#
+# Git pre-push hook launcher.
+# Blocks direct pushes to the main branch.
+# All changes to main must go through a pull request.
+
+while read local_ref local_sha remote_ref remote_sha; do
+  if [ "$remote_ref" = "refs/heads/main" ]; then
+    echo "ERROR: Direct push to main is not allowed."
+    echo "Create a branch and open a pull request instead."
+    exit 1
+  fi
+done
+
+exit 0

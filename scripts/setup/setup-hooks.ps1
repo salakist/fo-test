@@ -39,7 +39,8 @@ if (-not (Test-Path $GitHooksDir)) {
 
 $hooksToInstall = @(
     "pre-commit",
-    "commit-msg"
+    "commit-msg",
+    "pre-push"
 )
 
 Write-Host "Installing git hooks..."
