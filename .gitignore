@@ -14,3 +14,4 @@ Tests/**/artifacts/
 mongodump/
 review.md
 docs/
+**/*.pem

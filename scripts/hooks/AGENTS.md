@@ -12,8 +12,10 @@ Own the Git hook source templates that enforce commit-time checks in this reposi
 ## Key files
 - `pre-commit`
 - `commit-msg`
+- `pre-push`
 - `../setup/setup-hooks.ps1`
 - `../setup/set-agent-git-identity.ps1`
+- `../get-agent-token.ps1`
 
 ## Hook enforcement scope
 These boundaries describe how the local hooks enforce parts of root `COMMIT-POLICY.md` without
@@ -23,6 +25,7 @@ re-owning the full workflow.
   or Conventional Commit parsing logic.
 - `commit-msg` should validate agent identity/trailer expectations, the Conventional Commit header,
   and commit body line length rules, and should not duplicate the pre-commit quality gate.
+- `pre-push` should block direct pushes to `main` only; it should not re-run the quality gate.
 - Agents should pre-wrap commit body lines to **100 characters or fewer** instead of relying on a
   failed hook run to discover formatting problems.
 - Hook installation remains the responsibility of `setup-hooks.ps1`.
@@ -31,6 +34,7 @@ re-owning the full workflow.
 - `./scripts/setup/setup-hooks.ps1`
 - `./scripts/setup/set-agent-git-identity.ps1`
 - `./scripts/setup/set-agent-git-identity.ps1 -ClearLocalIdentity`
+- `$env:GH_TOKEN = (pwsh ./scripts/get-agent-token.ps1).Trim()`
 
 ## Dependencies
 - Git with a working `.git/hooks` directory
